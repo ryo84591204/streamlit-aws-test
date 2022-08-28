@@ -1,0 +1,20 @@
+version: "3"
+services:
+  streamlit:
+    env_file: ./.env.development
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: streamlit_ecs
+    working_dir: /usr/src/app/src
+    image: streamlit_ecs
+    networks:
+      - shared-nw
+    ports:
+      - 8501:8501
+    volumes:
+      - ./src:/usr/src/app/src
+
+networks:
+  shared-nw:
+    external: true
